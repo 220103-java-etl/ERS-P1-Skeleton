@@ -20,11 +20,23 @@ public class User extends AbstractUser {
         super();
     }
 
+    public User(String firstName,String lastName,String userName,String password,Role role){
+        super(firstName,lastName,userName,password,role);
+    }
+
     /**
      * This includes the minimum parameters needed for the {@link com.revature.models.AbstractUser} class.
      * If other fields are needed, please create additional constructors.
      */
-    public User(int id, String username, String password, Role role) {
-        super(id, username, password, role);
+    public User(int id, String firstname, String lastname, String username, String password, Role role) {
+        super(id, firstname, lastname, username, password, role);
     }
 }
+    /*
+    public User( String username, String password, Role role) {
+        super( username, password, role);
+    }
+}
+
+     */
+

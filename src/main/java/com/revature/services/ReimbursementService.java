@@ -40,7 +40,10 @@ public class ReimbursementService {
      * The Resolver should be null. Additional fields may be null.
      * After processing, the reimbursement will have its status changed to either APPROVED or DENIED.
      */
+
+
     public Reimbursement process(Reimbursement unprocessedReimbursement, Status finalStatus, User resolver) {
+
         return null;
     }
 
@@ -48,6 +51,8 @@ public class ReimbursementService {
      * Should retrieve all reimbursements with the correct status.
      */
     public List<Reimbursement> getReimbursementsByStatus(Status status) {
+
+
         return Collections.emptyList();
     }
 }

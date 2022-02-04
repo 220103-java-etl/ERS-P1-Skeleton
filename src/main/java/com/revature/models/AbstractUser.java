@@ -22,6 +22,8 @@ import java.util.Objects;
 public class AbstractUser {
 
     private int id;
+    private String firstname;
+    private String lastname;
     private String username;
     private String password;
     private Role role;
@@ -30,13 +32,27 @@ public class AbstractUser {
         super();
     }
 
-    public AbstractUser(int id, String username, String password, Role role) {
+    public AbstractUser(String firstname,String lastname, String username, String password, Role role){
+        super();
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+
+
+    }
+    public AbstractUser(int id,String firstname, String lastname, String username, String password, Role role) {
         super();
         this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.username = username;
         this.password = password;
         this.role = role;
     }
+
+
 
     public int getId() {
         return id;
@@ -44,6 +60,22 @@ public class AbstractUser {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getUsername() {

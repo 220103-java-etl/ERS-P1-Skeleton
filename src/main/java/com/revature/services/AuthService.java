@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import com.revature.models.User;
+import com.revature.repositories.UserDAO;
 
 import java.util.Optional;
 
@@ -17,7 +18,7 @@ import java.util.Optional;
  * </ul>
  */
 public class AuthService {
-
+    private UserDAO userDAO = new UserDAO();
     /**
      * <ul>
      *     <li>Needs to check for existing users with username/email provided.</li>
@@ -27,25 +28,36 @@ public class AuthService {
      *     <li>Must return user object if the user logs in successfully.</li>
      * </ul>
      */
-    public User login(String username, String password) {
-        return null;
-    }
+    public boolean login(String username, String password) {
 
-    /**
-     * <ul>
-     *     <li>Should ensure that the username/email provided is unique.</li>
-     *     <li>Must throw exception if the username/email is not unique.</li>
-     *     <li>Should persist the user object upon successful registration.</li>
-     *     <li>Must throw exception if registration is unsuccessful.</li>
-     *     <li>Must return user object if the user registers successfully.</li>
-     *     <li>Must throw exception if provided user has a non-zero ID</li>
-     * </ul>
-     *
-     * Note: userToBeRegistered will have an id=0, additional fields may be null.
-     * After registration, the id will be a positive integer.
-     */
-    public User register(User userToBeRegistered) {
-        return null;
+
+        /**
+         * <ul>
+         *     <li>Should ensure that the username/email provided is unique.</li>
+         *     <li>Must throw exception if the username/email is not unique.</li>
+         *     <li>Should persist the user object upon successful registration.</li>
+         *     <li>Must throw exception if registration is unsuccessful.</li>
+         *     <li>Must return user object if the user registers successfully.</li>
+         *     <li>Must throw exception if provided user has a non-zero ID</li>
+         * </ul>
+         *
+         * Note: userToBeRegistered will have an id=0, additional fields may be null.
+         * After registration, the id will be a positive integer.
+         */
+
+        User u = userDAO.getByUsername(username);
+
+        if (u != null) {
+            if (username.equals(u.getUsername()) && password.equals(u.getPassword())) {
+                return true;
+            }
+
+        }
+        System.out.println("User not found!");
+        return false;
+    }
+    public User register(User EMPLOYEE_TO_REGISTER) {
+        return EMPLOYEE_TO_REGISTER;
     }
 
     /**
@@ -56,4 +68,7 @@ public class AuthService {
     public Optional<User> exampleRetrieveCurrentUser() {
         return Optional.empty();
     }
+    /**
+
+    */
 }

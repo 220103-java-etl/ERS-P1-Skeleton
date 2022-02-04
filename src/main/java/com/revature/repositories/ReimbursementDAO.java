@@ -1,19 +1,49 @@
 package com.revature.repositories;
 
 import com.revature.models.Reimbursement;
+import com.revature.models.Role;
 import com.revature.models.Status;
+import com.revature.models.User;
+import com.revature.util.ConnectionFactory;
+import org.postgresql.util.ReaderInputStream;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 public class ReimbursementDAO {
-
+    static ConnectionFactory cu = ConnectionFactory.getInstance();
     /**
      * Should retrieve a Reimbursement from the DB with the corresponding id or an empty optional if there is no match.
      */
-    public Optional<Reimbursement> getById(int id) {
-        return Optional.empty();
+    public Reimbursement getById(int id) {
+        String sql = "select * from reimbursement where id = ?";
+
+        try (Connection conn = cu.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Reimbursement u = new Reimbursement(
+                        rs.getInt("id"),
+                        Status.valueOf(rs.getString("status")),
+                        UserDAO.getByUsername(rs.getString("username")),
+                        UserDAO.getByUsername(rs.getString("resolver")),
+                        rs.getDouble("amount")
+                );
+                return u;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -30,7 +60,9 @@ public class ReimbursementDAO {
      *     <li>Should return a Reimbursement object with updated information.</li>
      * </ul>
      */
-    public Reimbursement update(Reimbursement unprocessedReimbursement) {
-    	return null;
+    public Reimbursement update(Reimbursement unprocessedReimbursement,User user) {
+
+        return null;
+
     }
 }

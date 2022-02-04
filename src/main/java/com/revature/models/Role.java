@@ -22,13 +22,13 @@ public enum Role {
     EMPLOYEE {
         @Override
         public String toString() {
-            return "Employee";
+            return "EMPLOYEE";
         }
     },
     FINANCE_MANAGER {
         @Override
         public String toString() {
-            return "Finance Manager";
+            return "FINANCE MANAGER";
         }
     }
 
